@@ -7,10 +7,10 @@ export default new Vuetify({
   theme: {
     themes: {
       light: {
-        primary: "#2759cd",
+        primary: "#3943FF",
       },
       dark: {
-        primary: "#2759cd",
+        primary: "#3943FF",
       },
     },
   },
