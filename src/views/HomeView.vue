@@ -2,11 +2,17 @@
   <v-container fluid style="width: 95%">
     <TheBreadcrumbs v-model="breadcrumbs" />
 
-    <v-row>
-      <v-col>
+    <v-card class="customCard">
+      <v-card-title> Top western road trips </v-card-title>
+      <v-card-subtitle> 1,000 miles of wonder </v-card-subtitle>
+      <v-card-text>
+        text
         <TextField />
-      </v-col>
-    </v-row>
+      </v-card-text>
+      <v-card-actions>
+        <v-btn color="orange lighten-2" text> Explore </v-btn>
+      </v-card-actions>
+    </v-card>
   </v-container>
 </template>
 
@@ -21,7 +27,7 @@ export default {
   },
   data() {
     return {
-      breadcrumbs: [{ text: "홈", disabled: false }],
+      breadcrumbs: [{ text: "Dashboard", disabled: false }],
     };
   },
 };
