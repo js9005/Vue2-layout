@@ -16,16 +16,38 @@
       </v-list-item>
 
       <v-list>
-        <v-list-item-group color="primary">
-          <v-list-item v-for="(item, i) in menu" :key="i" :to="item.path">
-            <v-list-item-icon>
-              <v-icon v-text="item.icon"></v-icon>
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-list-item-title v-text="item.title"></v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list-item-group>
+        <div v-for="item in menu" :key="item.title">
+          <!-- 서브메뉴 있는 경우 -->
+          <template v-if="item.sub">
+            <v-list-group :prepend-icon="item.icon" no-action>
+              <template v-slot:activator>
+                <v-list-item-content>
+                  <v-list-item-title v-text="item.title"></v-list-item-title>
+                </v-list-item-content>
+              </template>
+              <v-list-item
+                v-for="child in item.sub"
+                :key="child.title"
+                :to="child.path"
+              >
+                <v-list-item-content>
+                  <v-list-item-title v-text="child.title"></v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list-group>
+          </template>
+          <!-- 서브메뉴 없는 경우 -->
+          <template v-else>
+            <v-list-item :to="item.path" color="primary">
+              <v-list-item-icon>
+                <v-icon v-text="item.icon"></v-icon>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-title v-text="item.title"></v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </template>
+        </div>
       </v-list>
     </v-navigation-drawer>
 
@@ -45,7 +67,7 @@
             </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title class="title">
-                {{ "user.name" }} 님
+                {{ "user.name" }}
               </v-list-item-title>
               <v-list-item-subtitle>
                 {{ "email address" }}
@@ -58,7 +80,7 @@
               <v-icon>mdi-bell</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-title>알림</v-list-item-title>
+              <v-list-item-title>Notification</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item @click="logoutAction" dense>
@@ -66,7 +88,7 @@
               <v-icon>mdi-logout</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-title>로그아웃</v-list-item-title>
+              <v-list-item-title>Logout</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list>
@@ -105,5 +127,10 @@ export default {
 }
 .v-navigation-drawer__border {
   display: none;
+}
+
+.customCard {
+  box-shadow: 0px 0px 40px rgba(0, 13, 135, 0.02) !important;
+  border-radius: 20px !important;
 }
 </style>
