@@ -8,6 +8,8 @@
       <v-card-text>
         text
         <TextField />
+
+        <DatePicker />
       </v-card-text>
       <v-card-actions>
         <v-btn color="orange lighten-2" text> Explore </v-btn>
@@ -19,11 +21,13 @@
 <script>
 import TheBreadcrumbs from "@/components/common/TheBreadcrumbs.vue";
 import TextField from "@/components/common/TextField.vue";
+import DatePicker from "@/components/common/DatePicker.vue";
 export default {
   name: "HomeView",
   components: {
     TheBreadcrumbs,
     TextField,
+    DatePicker,
   },
   data() {
     return {
