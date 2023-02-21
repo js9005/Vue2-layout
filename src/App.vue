@@ -132,5 +132,6 @@ export default {
 .customCard {
   box-shadow: 0px 0px 40px rgba(0, 13, 135, 0.02) !important;
   border-radius: 20px !important;
+  margin-bottom: 30px;
 }
 </style>

@@ -24,6 +24,16 @@ const router = new VueRouter({
         next();
       },
     },
+
+    /**
+     * Users
+     */
+    {
+      path: "/user-list",
+      name: "UserListView",
+      component: () => import("@/views/users/UserListView.vue"),
+      meta: { requireLogin: true },
+    },
   ],
 });
 
