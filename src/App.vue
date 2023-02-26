@@ -1,6 +1,11 @@
 <template>
   <v-app>
-    <v-navigation-drawer v-model="drawer" app class="customShadow">
+    <v-navigation-drawer
+      v-model="drawer"
+      app
+      v-if="authenticated"
+      class="customShadow"
+    >
       <v-list-item>
         <v-list-item-content>
           <h1>LOGO</h1>
@@ -51,7 +56,7 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar app class="customShadow">
+    <v-app-bar app v-if="authenticated" class="customShadow">
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-spacer></v-spacer>
       <v-menu offset-y>
@@ -83,7 +88,7 @@
               <v-list-item-title>Notification</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <v-list-item @click="logoutAction" dense>
+          <v-list-item @click="logout" dense>
             <v-list-item-icon>
               <v-icon>mdi-logout</v-icon>
             </v-list-item-icon>
@@ -103,6 +108,7 @@
 
 <script>
 import { menu } from "@/utils/menu.js";
+import { mapGetters, mapActions } from "vuex";
 export default {
   name: "App",
 
@@ -113,9 +119,20 @@ export default {
     menu,
   }),
 
+  computed: {
+    ...mapGetters({
+      authenticated: "auth/authUser",
+    }),
+  },
+
   methods: {
+    ...mapActions({
+      logoutAction: "auth/logout",
+    }),
     alert() {},
-    logoutAction() {},
+    logout() {
+      this.logoutAction();
+    },
   },
 };
 </script>

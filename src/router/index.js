@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router"; //npm install vue-router@3로 설치
 Vue.use(VueRouter);
 
+import store from "@/store";
 import HomeView from "@/views/HomeView";
 
 const router = new VueRouter({
@@ -18,9 +19,12 @@ const router = new VueRouter({
       path: "/login",
       name: "LoginView",
       component: () => import("@/views/LoginView.vue"),
+      //router.beforeEach가 먼저 실행되고 로그인 beforeEnter가 실행됨
       beforeEnter: (to, from, next) => {
-        //이미 로그인된 상태에서 로그인 페이지로 가는 경우 대응
-        console.log("로그인 beforeEnter");
+        if (store.getters["auth/authUser"]) {
+          //이미 로그인된 상태에서 로그인 페이지로 가는 경우 대응
+          next({ name: "HomeView" });
+        }
         next();
       },
     },
@@ -38,8 +42,10 @@ const router = new VueRouter({
 });
 
 router.beforeEach(async (to, from, next) => {
-  //로그인이 필요한 페이지로 갈 때 토큰이 없는 경우 대응
-  console.log("라우터 beforeEach");
+  if (to.meta.requireLogin && !store.getters["auth/authUser"]) {
+    //로그인이 필요한 페이지로 갈 때 토큰이 없는 경우 대응
+    next({ name: "LoginView" });
+  }
   next();
 });
 
