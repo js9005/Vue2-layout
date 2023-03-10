@@ -11,7 +11,7 @@ axios.interceptors.request.use(
     config.headers.Authorization = `Bearer ${localStorage.getItem(
       "vue2_layout_token"
     )}`;
-    return config; //안하면 Cannot read properties of undefined (reading 'cancelToken') 에러 발생
+    return config; //없으면 Cannot read properties of undefined (reading 'cancelToken') 에러 발생
   },
   function (error) {
     // console.log(error, "리퀘스트 error");
@@ -21,7 +21,7 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
   function (response) {
     // console.log(response, "리스폰스 response");
-    return response; //안하면 값을 받을 수 없음
+    return response; //없으면 값을 받을 수 없음
   },
   function (error) {
     // console.log(error, "리스폰스 error");
